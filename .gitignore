@@ -1,0 +1,20 @@
+# Logs
+*.log*
+
+# Dep dirs
+node_modules/
+vendor/
+
+# IDEs
+.idea/
+.vscode/
+
+# Etcetera
+.env
+
+# Project
+docker-compose.yml
+locations/
+logs/
+ncache/
+wordpress/
