@@ -48,6 +48,7 @@ services:
     depends_on:
       - ${WORDPRESS_ID}_wordpress
     volumes:
+      - ./ncache:/ncache
       - ./wordpress:/var/www/html
       - ./nginx/logs:/var/log/nginx
       - ./nginx/${NGINX_CONF-standard}.conf:/etc/nginx/default.template
@@ -66,6 +67,7 @@ services:
     restart: unless-stopped
     container_name: ${WORDPRESS_ID}_wordpress
     volumes:
+      - ./ncache:/ncache
       - ./wordpress:/var/www/html
       - ./php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
     environment:
