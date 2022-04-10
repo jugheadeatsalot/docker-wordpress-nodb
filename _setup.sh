@@ -48,7 +48,7 @@ services:
     depends_on:
       - ${WORDPRESS_ID}_wordpress
     volumes:
-      - ./ncache:/ncache
+      - ncache:/ncache
       - ./wordpress:/var/www/html
       - ./nginx/logs:/var/log/nginx
       - ./nginx/${NGINX_CONF-standard}.conf:/etc/nginx/default.template
@@ -67,7 +67,7 @@ services:
     restart: unless-stopped
     container_name: ${WORDPRESS_ID}_wordpress
     volumes:
-      - ./ncache:/ncache
+      - ncache:/ncache
       - ./wordpress:/var/www/html
       - ./php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
     environment:
@@ -76,5 +76,8 @@ services:
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}${debug}
       WORDPRESS_CONFIG_EXTRA: |
-        define('WP_POST_REVISIONS', 3);${network}
+        define('WP_POST_REVISIONS', 3);
+
+volumes:
+  ncache:${network}
 EOF
