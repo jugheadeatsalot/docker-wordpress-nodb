@@ -10,16 +10,16 @@ fi
 . .env
 
 network=''
-debug=''
+environment=''
 
 ####################
-# DEBUG
+# ENVIRONMENT
 ####################
-if [ -n "${WORDPRESS_DEBUG}" ]; then
-  debug="$(
+if [ -n "${WP_ENVIRONMENT_TYPE}" ]; then
+  environment="$(
     cat <<EOF
 
-      WORDPRESS_DEBUG: ${WORDPRESS_DEBUG}
+      WP_ENVIRONMENT_TYPE: ${WP_ENVIRONMENT_TYPE}
 EOF
   )"
 fi
@@ -73,7 +73,7 @@ services:
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
-      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}${debug}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}${environment}
       WORDPRESS_CONFIG_EXTRA: |
         define('WP_POST_REVISIONS', 3);
         define('RT_WP_NGINX_HELPER_CACHE_PATH', '/ncache');
