@@ -9,5 +9,5 @@ fi
 # shellcheck source=/dev/null
 . .env
 
-docker exec -it -e GID="$(id -g)" "${WORDPRESS_ID}"_wordpress \
+docker exec -it -e GID="$(id -g)" "wp_${WORDPRESS_ID}" \
     bash -c 'chgrp -R $GID ./ && chmod -R g+w ./*'

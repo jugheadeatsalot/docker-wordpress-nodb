@@ -9,5 +9,5 @@ fi
 # shellcheck source=/dev/null
 . .env
 
-docker exec -it "${WORDPRESS_ID}"_wordpress \
+docker exec -it "wp_${WORDPRESS_ID}" \
     bash -c 'chgrp -R www-data ./ && chmod -R g-w ./*'
