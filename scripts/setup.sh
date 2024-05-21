@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd "$(dirname "$0")/.." || exit
+
 # exit if no .env file
 if [ ! -f .env ]; then
   echo "No .env file found. Exiting..."

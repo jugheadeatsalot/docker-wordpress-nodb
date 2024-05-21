@@ -1,0 +1,51 @@
+{
+  "folders": [
+    {
+      "name": "root",
+      "path": "."
+    },
+    {
+      "name": "wordpress",
+      "path": "wordpress"
+    },
+    {
+      "name": "devtools",
+      "path": "devtools"
+    },
+    {
+      "name": "themes",
+      "path": "wordpress/wp-content/themes"
+    },
+    {
+      "name": "plugins",
+      "path": "wordpress/wp-content/plugins"
+    },
+    {
+      "name": "nginx-helper",
+      "path": "wordpress/wp-content/plugins/nginx-helper"
+    },
+    {
+      "name": "ncache-purger",
+      "path": "wordpress/wp-content/plugins/ncache-purger"
+    }
+  ],
+  "settings": {
+    "[php]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "mtbdata.vscode-phpsab-docker"
+    },
+    "phpsab.docker.fixerEnable": true,
+    "phpsab.docker.dockerExecutablePathCS": "/devtools/vendor/bin/phpcs",
+    "phpsab.docker.dockerExecutablePathCBF": "/devtools/vendor/bin/phpcbf",
+    "phpsab.docker.dockerEnabled": true,
+    "phpsab.docker.dockerContainer": "wp_test",
+    "phpsab.docker.dockerWorkspaceRoot": "/var/www/html",
+    "phpsab.docker.standard": "PSR2"
+  },
+  "extensions": {
+    "recommendations": [
+      "mtbdata.vscode-phpsab-docker",
+      "bmewburn.vscode-intelephense-client"
+    ]
+  }
+}
