@@ -13,9 +13,11 @@ fi
 
 network=''
 environment=''
+dev_ports=''
+domains=''
 
 ####################
-# ENVIRONMENT
+# Environment
 ####################
 if [ -n "${WP_ENVIRONMENT_TYPE}" ]; then
   environment="$(
@@ -26,6 +28,35 @@ EOF
   )"
 fi
 ####################
+
+####################
+# Dev Ports
+####################
+if [ -n "${DEV_PORTS}" ]; then
+  dev_ports="$(
+    cat <<EOF
+
+    ports:
+      - ${DEV_PORTS}
+EOF
+  )"
+fi
+####################
+
+####################
+# Domains
+####################
+if [ -z "${dev_ports}" ]; then
+  if [ -n "${WORDPRESS_DOMAIN}" ]; then
+    domains="$(
+      cat <<EOF
+
+      VIRTUAL_HOST: ${WORDPRESS_DOMAIN}
+      LETSENCRYPT_HOST: ${WORDPRESS_DOMAIN}
+EOF
+    )"
+  fi
+fi
 
 ####################
 # Networks
@@ -45,7 +76,7 @@ services:
   wp_nginx_${WORDPRESS_ID}:
     build: nginx
     restart: unless-stopped
-    container_name: wp_nginx_${WORDPRESS_ID}
+    container_name: wp_nginx_${WORDPRESS_ID}${dev_ports}
     depends_on:
       - wp_${WORDPRESS_ID}
     volumes:
@@ -56,9 +87,7 @@ services:
       - ./nginx/extras:/etc/nginx/extras
       - ./nginx/locations:/etc/nginx/locations
     environment:
-      WP_HOST: wp_${WORDPRESS_ID}:9000
-      VIRTUAL_HOST: ${WORDPRESS_DOMAIN}
-      LETSENCRYPT_HOST: ${WORDPRESS_DOMAIN}
+      WP_HOST: wp_${WORDPRESS_ID}:9000${domains}
     command: >
       /bin/sh -c "envsubst '\$\$WP_HOST'
       < /etc/nginx/default.template >

@@ -5,6 +5,10 @@
       "path": "."
     },
     {
+      "name": "scripts",
+      "path": "scripts"
+    },
+    {
       "name": "wordpress",
       "path": "wordpress"
     },
